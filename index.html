@@ -3,41 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Girişi</title>
+    <title>Login to Roblox</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
-        .login-header { font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; color: #1c1e21; }
-        .input-group { margin-bottom: 1rem; text-align: left; }
-        .input-group label { display: block; margin-bottom: 0.5rem; color: #4b4f56; font-size: 0.9rem; }
-        .input-group input { width: 100%; padding: 0.75rem; border: 1px solid #dddfe2; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
-        .login-button { width: 100%; padding: 0.75rem; background-color: #1877f2; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
-        .login-button:hover { background-color: #166fe5; }
-        .footer-links { margin-top: 1rem; font-size: 0.9rem; color: #1c1e21; }
-        .footer-links a { color: #1877f2; text-decoration: none; }
-        .footer-links a:hover { text-decoration: underline; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #191b1d; /* Arkadaki koyu arka plan */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.rbxcdn.com/97491cf0eb8201a056a004eb651c6c51.jpg'); /* Opsiyonel Roblox arka plan görseli */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Giriş Kutusu (Modal) */
+        .login-container {
+            background-color: #2b2d2f;
+            width: 100%;
+            max-width: 440px;
+            padding: 35px 30px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* Giriş Alanları (Inputs) */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            background-color: #393b3d;
+            border: 1px solid #55585a;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: #85888a;
+        }
+
+        .input-group input:focus {
+            border-color: #ffffff;
+        }
+
+        /* Ana Giriş Butonu */
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Linkler */
+        .forgot-link {
+            display: inline-block;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            margin: 25px 0;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Diğer Butonlar */
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background-color: #393b3d;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #484a4c;
+        }
+
+        /* Alt Kısım (Kayıt Ol) */
+        .signup-text {
+            color: #b8b8b8;
+            font-size: 13px;
+            margin-top: 25px;
+        }
+
+        .signup-text a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
+
     <div class="login-container">
-        <div class="login-header">Hesabınıza Giriş Yapın</div>
-        <form action="/login" method="POST">
-            <input type="hidden" name="csrf_token" value="ÖrnekCSRFToken">
+        <h2>Login to Roblox</h2>
+        
+        <form onsubmit="event.preventDefault();">
+            <div class="input-group">
+                <input type="text" placeholder="Username/Email/Phone" required>
+            </div>
             
             <div class="input-group">
-                <label for="username">Kullanıcı Adı / E-posta</label>
-                <input type="text" id="username" name="username" required autocomplete="username">
+                <input type="password" placeholder="Password" required>
             </div>
-            <div class="input-group">
-                <label for="password">Şifre</label>
-                <input type="password" id="password" name="password" required autocomplete="current-password">
-            </div>
-            <button type="submit" class="login-button">Giriş Yap</button>
+            
+            <button type="submit" class="btn-login">Log In</button>
         </form>
-        <div class="footer-links">
-            <p><a href="/forgot-password">Şifremi Unuttum?</a></p>
-            <p>Hesabınız yok mu? <a href="/signup">Kaydolun</a></p>
+
+        <a href="#" class="forgot-link">Forgot Password or Username?</a>
+
+        <button class="btn-secondary">Email Me a One-Time Code</button>
+        <button class="btn-secondary">Use Another Device</button>
+
+        <div class="signup-text">
+            Don't have an account? <a href="#">Sign Up</a>
         </div>
     </div>
+
 </body>
 </html>
