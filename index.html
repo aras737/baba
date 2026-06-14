@@ -3,109 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to Roblox</title>
+    <title>Roblox Login Page</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #191b1d; /* Arkadaki koyu arka plan */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.rbxcdn.com/97491cf0eb8201a056a004eb651c6c51.jpg'); /* Opsiyonel Roblox arka plan görseli */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
+            background: radial-gradient(circle at center, #1e2022 0%, #0c0d0e 100%);
+            color: #ffffff;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Giriş Kutusu (Modal) */
+        /* Arka plandaki bulanık oyun görselleri efekti */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+        }
+
+        /* --- ÜST MENÜ (NAVBAR) --- */
+        .navbar {
+            width: 100%;
+            height: 60px;
+            background-color: #191b1d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            border-bottom: 1px solid #2d3035;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* CSS ile Yapılmış Roblox Logosu */
+        .roblox-logo {
+            width: 24px;
+            height: 24px;
+            background-color: #ffffff;
+            transform: rotate(-15deg);
+            margin-right: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #cbcccd;
+        }
+
+        .nav-links span {
+            cursor: pointer;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-signup-top {
+            background-color: #0074f4;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .search-icon {
+            cursor: pointer;
+            fill: #ffffff;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- GİRİŞ PANELİ (MODAL) --- */
         .login-container {
-            background-color: #2b2d2f;
+            background-color: #25272a;
             width: 100%;
             max-width: 440px;
-            padding: 35px 30px;
+            margin-top: auto;
+            margin-bottom: auto;
+            padding: 30px 25px;
             border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
             text-align: center;
         }
 
-        h2 {
-            color: #ffffff;
+        .login-title {
             font-size: 28px;
             font-weight: 700;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
         }
 
-        /* Giriş Alanları (Inputs) */
+        /* Input Alanları */
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        .input-group input {
+        .input-field {
             width: 100%;
-            padding: 14px;
             background-color: #393b3d;
-            border: 1px solid #55585a;
-            border-radius: 4px;
+            border: 1px solid #55585c;
             color: #ffffff;
-            font-size: 16px;
+            padding: 14px;
+            border-radius: 4px;
+            font-size: 15px;
             outline: none;
         }
 
-        .input-group input::placeholder {
-            color: #85888a;
+        .input-field::placeholder {
+            color: #85888b;
         }
 
-        .input-group input:focus {
+        .input-field:focus {
             border-color: #ffffff;
         }
 
-        /* Ana Giriş Butonu */
+        /* Butonlar */
         .btn-login {
             width: 100%;
-            padding: 12px;
             background-color: transparent;
             border: 1px solid #ffffff;
             color: #ffffff;
+            padding: 12px;
             font-size: 16px;
             font-weight: 600;
             border-radius: 4px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 5px;
+            margin-bottom: 25px;
             transition: background 0.2s;
         }
 
         .btn-login:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255,255,255,0.1);
         }
 
-        /* Linkler */
         .forgot-link {
-            display: inline-block;
             color: #ffffff;
             text-decoration: none;
             font-size: 15px;
             font-weight: 600;
-            margin: 25px 0;
+            display: inline-block;
+            margin-bottom: 35px;
         }
 
         .forgot-link:hover {
             text-decoration: underline;
         }
 
-        /* Diğer Butonlar */
         .btn-secondary {
             width: 100%;
-            padding: 14px;
             background-color: #393b3d;
             border: none;
             color: #ffffff;
+            padding: 14px;
             font-size: 15px;
             font-weight: 600;
             border-radius: 4px;
@@ -115,39 +187,75 @@
         }
 
         .btn-secondary:hover {
-            background-color: #484a4c;
+            background-color: #484a4d;
         }
 
-        /* Alt Kısım (Kayıt Ol) */
-        .signup-text {
-            color: #b8b8b8;
-            font-size: 13px;
+        /* Alt Kısım Kayıt Ol Yazısı */
+        .footer-signup {
             margin-top: 25px;
+            font-size: 13px;
+            color: #b8b9ba;
         }
 
-        .signup-text a {
+        .footer-signup a {
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
+            margin-left: 5px;
         }
 
-        .signup-text a:hover {
+        .footer-signup a:hover {
             text-decoration: underline;
+        }
+
+        /* Mobil Cihazlar İçin Uyum */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 10px;
+            }
+            .nav-links {
+                display: none; /* Mobilde orta linkler gizlenir */
+            }
+            .login-container {
+                max-width: 100%;
+                height: calc(100vh - 60px);
+                border-radius: 0;
+                box-shadow: none;
+                padding-top: 50px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Login to Roblox</h2>
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="roblox-logo"></div>
+            <div class="nav-links">
+                <span>Charts</span>
+                <span>Marketplace</span>
+                <span>Create</span>
+                <span>Robux</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="btn-signup-top">Sign Up</button>
+            <svg class="search-icon" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </div>
+    </header>
+
+    <main class="login-container">
+        <h1 class="login-title">Login to Roblox</h1>
         
         <form onsubmit="event.preventDefault();">
             <div class="input-group">
-                <input type="text" placeholder="Username/Email/Phone" required>
+                <input type="text" class="input-field" placeholder="Username/Email/Phone" autocomplete="username">
             </div>
             
             <div class="input-group">
-                <input type="password" placeholder="Password" required>
+                <input type="password" class="input-field" placeholder="Password" autocomplete="current-password">
             </div>
             
             <button type="submit" class="btn-login">Log In</button>
@@ -158,10 +266,10 @@
         <button class="btn-secondary">Email Me a One-Time Code</button>
         <button class="btn-secondary">Use Another Device</button>
 
-        <div class="signup-text">
+        <div class="footer-signup">
             Don't have an account? <a href="#">Sign Up</a>
         </div>
-    </div>
+    </main>
 
 </body>
 </html>
