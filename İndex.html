@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Girişi</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        .login-header { font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; color: #1c1e21; }
+        .input-group { margin-bottom: 1rem; text-align: left; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #4b4f56; font-size: 0.9rem; }
+        .input-group input { width: 100%; padding: 0.75rem; border: 1px solid #dddfe2; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
+        .login-button { width: 100%; padding: 0.75rem; background-color: #1877f2; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
+        .login-button:hover { background-color: #166fe5; }
+        .footer-links { margin-top: 1rem; font-size: 0.9rem; color: #1c1e21; }
+        .footer-links a { color: #1877f2; text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">Hesabınıza Giriş Yapın</div>
+        <form action="/login" method="POST">
+            <input type="hidden" name="csrf_token" value="ÖrnekCSRFToken">
+            
+            <div class="input-group">
+                <label for="username">Kullanıcı Adı / E-posta</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="login-button">Giriş Yap</button>
+        </form>
+        <div class="footer-links">
+            <p><a href="/forgot-password">Şifremi Unuttum?</a></p>
+            <p>Hesabınız yok mu? <a href="/signup">Kaydolun</a></p>
+        </div>
+    </div>
+</body>
+</html>
